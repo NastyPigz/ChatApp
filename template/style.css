@@ -1,0 +1,200 @@
+* {
+  margin:  0px;
+  border: 0px;
+}
+body {
+  overflow: hidden;
+}
+.hidden-box {
+  display: none;
+}
+::-webkit-scrollbar{
+width: 13px;
+height: 13px;
+}
+::-webkit-scrollbar-thumb{
+background: linear-gradient(224deg, #474047 18%,#474047 77%);
+border: 2.3px none #FF0000;
+border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover{
+background: #474047;
+}
+::-webkit-scrollbar-track{
+background: #F0F0F0;
+border-radius: 0px;
+box-shadow: inset 0px 0px 0px 11px #807D80;
+}
+.messages-box {
+  height: 85vh;
+  width: 75%;
+  overflow-y: auto;
+  margin-left: 25vw;
+}
+
+#chat-messages {
+
+  font-size: 3vh;
+  word-wrap: break-word;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+#list {
+position: absolute;
+display: block;
+    height: 100%;
+z-index: 3;
+  background: #363e47;
+width: 25%;
+
+  font-size: 2.5vh;
+  word-wrap: break-word;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+
+#items {
+position: absolute;
+display: block;
+    height: 100%;
+z-index: 3;
+  background: #303841;
+width: 20%;
+
+  font-size: 2.5vh;
+  word-wrap: break-word;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+#username-input {
+  border-radius: 0.5vh;
+  border-color: #e5e059;
+  background-color: #e5e059;
+  position: absolute;
+  display: block
+}
+
+button {
+  white-space: nowrap;
+  border-radius: 0.5vh;
+  border-color: #e5e059;
+  background-color: #e5e059;
+ position: absolute;
+  display: block;
+ text-overflow: ellipsis;
+}
+
+body {
+  background-color: #ebebeb;
+}
+
+#overlay1 {
+  background-color: #010400;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  display: block;
+}
+
+#Title {
+  margin-top: 35vh;
+  margin-left: 8vw;
+  color: white;
+  z-index: 2;
+  font-size: 20vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  position: absolute;
+  display: block;
+}
+
+#username-input {
+  margin-left: 30vw;
+  margin-top: 70vh;
+  z-index: 33;
+  background-color: white;
+  color: black;
+  height: 10vh;
+  width: 25vw;
+  font-size: 8vh;
+}
+
+
+#message-send {
+  margin-left: 10vw;
+
+  z-index: 33;
+  background: transparent;
+  color: black;
+  
+  width: 5vw;
+  font-size: 4vh;
+  display: block;
+  position: absolute;
+
+}
+
+#img {
+
+    margin-left: 83vw; 
+  width: 5vw;
+    display: block;
+  position: absolute;
+}
+#message-input {
+width: 60%;
+height: 8%;
+  z-index: 33;
+  background: transparent;
+  border: none;
+  color: black;
+ 
+  font-size: 4vh;
+  display: block;
+  position: absolute;
+outline: none;
+overflow-clip-box: hidden;
+margin-left: 27vw;
+
+}
+
+
+#join-chat {
+  margin-top: 67vh;
+  margin-left: 57.6vw;
+  z-index: 33;
+  height: 15vh;
+  width: 17vw;
+  font-size: 200;
+  color: white;
+  background: transparent;
+}
+#footer {
+  display: none;
+  position: absolute;
+background-color: #f8f3f3;
+width: 100%;
+height: 14%;
+margin-top: 86vh;
+
+}
+
+#clear {
+  display: none;
+}
+#username {
+  position: relative;
+}
+
+#person {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: white;
+  font-size: 4.5vh;
+  position: absolute;
+  display: block;
+  margin-left: 7vw;
+  
+}
+
