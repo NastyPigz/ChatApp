@@ -1,5 +1,6 @@
 let main = document.getElementById("stuff");
 let tick = 1;
+const socket = io();
 
 function generateRandom(length) {
     let result           = '';

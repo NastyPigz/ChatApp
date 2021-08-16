@@ -18,13 +18,15 @@ border: 2.3px none #FF0000;
 border-radius: 0px;
 }
 ::-webkit-scrollbar-thumb:hover{
-background: #474047;
+  background: #474047;
 }
+
 ::-webkit-scrollbar-track{
-background: #F0F0F0;
-border-radius: 0px;
-box-shadow: inset 0px 0px 0px 11px #807D80;
+  background: #F0F0F0;
+  border-radius: 0px;
+  box-shadow: inset 0px 0px 0px 11px #807D80;
 }
+
 .messages-box {
   height: 85vh;
   width: 75%;
@@ -33,7 +35,6 @@ box-shadow: inset 0px 0px 0px 11px #807D80;
 }
 
 #chat-messages {
-
   font-size: 3vh;
   word-wrap: break-word;
   overflow-x: hidden;
@@ -41,13 +42,12 @@ box-shadow: inset 0px 0px 0px 11px #807D80;
 }
 
 #list {
-position: absolute;
-display: block;
-    height: 100%;
-z-index: 3;
+  position: absolute;
+  display: block;
+  height: 100%;
+  z-index: 3;
   background: #363e47;
-width: 25%;
-
+  width: 25%;
   font-size: 2.5vh;
   word-wrap: break-word;
   overflow-x: hidden;
@@ -121,70 +121,82 @@ body {
   font-size: 8vh;
 }
 
+#password-input {
+  margin-left: 30vw;
+  margin-top: 80vh;
+  z-index: 33;
+  background-color: white;
+  color: black;
+  height: 10vh;
+  width: 25vw;
+  font-size: 8vh;
+}
+
 
 #message-send {
   margin-left: 10vw;
-
   z-index: 33;
   background: transparent;
   color: black;
-  
-  width: 5vw;
+  top: 88.5vh;
+  width: 3.5vw;
   font-size: 4vh;
   display: block;
   position: absolute;
-
+  padding-bottom: 1vh;
+  padding-right: 1vh;
+  padding-left: 1vh;
+  border-radius: 1vh;
 }
 
 #img {
-
-    margin-left: 83vw; 
+  margin-left: 83vw; 
   width: 5vw;
-    display: block;
+  display: block;
   position: absolute;
 }
+
 #message-input {
-width: 60%;
-height: 8%;
-  z-index: 33;
+  width: 60%;
+  height: 8%;
+  z-index: 100;
   background: transparent;
   border: none;
   color: black;
- 
   font-size: 4vh;
   display: block;
   position: absolute;
-outline: none;
-overflow-clip-box: hidden;
-margin-left: 27vw;
-
+  outline: none;
+  overflow-clip-box: hidden;
+  margin-left: 27vw;
 }
 
-
-#join-chat {
-  margin-top: 67vh;
-  margin-left: 57.6vw;
-  z-index: 33;
-  height: 15vh;
-  width: 17vw;
-  font-size: 200;
+#login-submit {
+  /* margin-left: 15vw; */
+  /* margin-top: 67vh;
+  margin-left: 57.6vw; */
+  /* z-index: 100; */
+  /* height: 15vh;
+  width: 17vw; */
+  font-size: 5vh;
   color: white;
   background: transparent;
+  display: block;
 }
+
 #footer {
   display: none;
   position: absolute;
-background-color: #f8f3f3;
-width: 100%;
-height: 14%;
-margin-top: 86vh;
-
+  background-color: #f8f3f3;
+  width: 100%;
+  height: 14%;
+  margin-top: 86vh;
 }
 
 #clear {
   display: none;
 }
-#username {
+#login {
   position: relative;
 }
 
@@ -195,6 +207,89 @@ margin-top: 86vh;
   position: absolute;
   display: block;
   margin-left: 7vw;
-  
 }
 
+#emoji {
+  background: transparent;
+  width: 3.5vw;
+  display: block;
+  position: absolute;
+  top: 3.5vh;
+  margin-left: 80vw;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  padding-right: 1vh;
+  padding-left: 1vh;
+  border-radius: 1vh;
+  z-index: 999999999999999999999;
+}
+
+#openemoji {
+  z-index: 999999999999999999999;
+  display: block;
+  position: relative;
+  background: transparent;
+  border: transparent;
+}
+
+#emoji:hover {
+  background: black;
+}
+
+#emojipanel {
+  z-index: 36;
+  display: none;
+  position: absolute;
+  width: 20vw;
+  height: 45vh;
+  background: #363e47;
+  margin-left: 73vw;
+ bottom: 17vh;
+  border-radius: 2vh;
+}
+
+#emojititle {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background: #303841;
+  display: block;
+  position: relative;
+  bottom: 3vh;
+  border-radius: 2vh;
+  text-align: center;
+  color: white;
+  line-height: 7vh;
+  font-size: 5vh
+}
+#area {
+  display: block;
+  position: absolute;
+}
+#emoji1 {
+  background: transparent;
+  display: block;
+  position: relative;
+  bottom: 0.5vh;
+  border: none;
+  font-size: 4.5vh;
+}
+
+#emoji2 {
+  background: transparent;
+  display: block;
+  position: relative;
+  bottom: 36.6vh;
+  left: 6vh;
+  border: none;
+  font-size: 4.5vh;
+}
+
+#emoji3 {
+  background: transparent;
+  display: block;
+  position: relative;
+  bottom: 72.5vh;
+  left: 12vh;
+  border: none;
+  font-size: 4.5vh;
+}

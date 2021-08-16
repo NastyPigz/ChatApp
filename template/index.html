@@ -19,34 +19,61 @@
   </head>
   <body>
     <p id="overlay1"></p>
-    <h1 id="Title">Choose a Username</h1>
-      <div id="username">
+    <h1 id="Title">ChatApp</h1>
+      <div id="login">
         <input minlength="3" maxlength="18" type="text" width="50%" id="username-input"/>
-        <button id="join-chat">Username</button>
+        <br>
+        <input minlength="3" maxlength="18" type="text" width="50%" id="password-input"/>
+        <button id="login-submit">Login</button>
       </div>
       <p id="footer"></p>
-      <div  id="chat-box" class="hidden-box">
+    <div  id="chat-box" class="hidden-box">
       <div id="list">
-         
-        
         <div id="items"></div>
       </div>
 
-      <div id="chat-messages" class="messages-box"></div>
-     
+      <div id="chat-messages" class="messages-box"></div>  
       <br>
       <div id="messages">
-      <button id="message-send"><img id="img" src="send.png" alt="Send"></button>
-    <textarea
-      style="resize: none"
-      placeholder="Type Messages Here"
-      name=""
-      id="message-input"
-      cols="90"
-      rows="3"
-    ></textarea>
-    <button id="clear">Clear Chat</button>
-    </div>
+        <button id="message-send"><img id="img" src="send.png" alt="Send"></button>
+        <button id="openemoji">
+          <img onclick="test()" id="emoji" src="emoji.png" alt="Emoji" />
+        </button> 
+        <div id="emojipanel">
+          <h1 id="emojititle">Emoji</h1>
+          <button onclick="insertemoji('😃', 'message-input')" id="emoji1">😃</button>
+          <button onclick="insertemoji('😠', 'message-input')" id="emoji1">😠</button>
+          <button onclick="insertemoji('👋', 'message-input')" id="emoji1">👋</button>
+          <button onclick="insertemoji('😳', 'message-input')" id="emoji1">😳</button>
+          <button onclick="insertemoji('😂', 'message-input')" id="emoji1">😂</button>
+          <button onclick="insertemoji('🙃', 'message-input')" id="emoji1">🙃</button>
+          <button onclick="insertemoji('😝', 'message-input')" id="emoji1">😝</button>
+
+          <button onclick="insertemoji('🙁', 'message-input')" id="emoji2">🙁</button>
+          <button onclick="insertemoji('😭', 'message-input')" id="emoji2">😭</button>
+          <button onclick="insertemoji('👍', 'message-input')" id="emoji2">👍</button>
+          <button onclick="insertemoji('👎', 'message-input')" id="emoji2">👎</button>
+          <button onclick="insertemoji('😬', 'message-input')" id="emoji2">😬</button>
+          <button onclick="insertemoji('😶', 'message-input')" id="emoji2">😶</button>
+          <button onclick="insertemoji('😆', 'message-input')" id="emoji2">😆</button>
+          <button onclick="insertemoji('😌', 'message-input')" id="emoji3">😌</button>
+          <button onclick="insertemoji('😉', 'message-input')" id="emoji3">😉</button>
+          <button onclick="insertemoji('🤑', 'message-input')" id="emoji3">🤑</button>
+          <button onclick="insertemoji('😋', 'message-input')" id="emoji3">😋</button>
+          <button onclick="insertemoji('🙄', 'message-input')" id="emoji3">🙄</button>
+          <button onclick="insertemoji('😥', 'message-input')" id="emoji3">😥</button>
+          <button onclick="insertemoji('😴', 'message-input')" id="emoji3">😴</button>
+        </div>
+        <textarea
+          style="resize: none"
+          placeholder="Type Messages Here"
+          name=""
+          id="message-input"
+          cols="90"
+          rows="3"
+        ></textarea>
+        <button id="clear">Clear Chat</button>
+      </div>
     </div>
     <script src="./index.js"></script>
     <script src="./fitty.min.js" ></script>
@@ -57,18 +84,29 @@
        $("#Title").resizable();
        $("#footer").resizable();
        $("#chat-messages").resizable();
+         $("#emojipanel").resizable();
+           $("#emoji1").resizable();
+             $("#emoji2").resizable();
+             $("#emoji3").resizable();
     
       });
     </script>
     </script>
+    
     <script></script>
-    $(document).ready(function(){
-	zoom = $(window).width()/$("body table tbody").width()*100;
-	document.body.style.zoom = zoom+"%";
-});
-$(window).on('resize', function(){
-	zoom = $(window).width()/$("body table tbody").width()*100;
-	document.body.style.zoom = zoom+"%";
-});
+   
+     <script>
+      function test() {
+        if (document.getElementById("emojipanel").style.display === "none") {
+          document.getElementById("emojipanel").style.display = "block";
+        } else {
+          document.getElementById("emojipanel").style.display = "none";
+        }
+      }
+
+      function insertemoji(emoji, element) {
+        document.getElementById(element).value += emoji;
+      }
+    </script>
   </body>
 </html>

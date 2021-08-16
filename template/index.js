@@ -1,13 +1,11 @@
-let joinChat = document.getElementById("join-chat");
+let loginSubmit = document.getElementById("login-submit");
 let usernameInput = document.getElementById("username-input");
 let chatBox = document.getElementById("chat-box");
 let chatMessages = document.getElementById("chat-messages");
 let messageInput = document.getElementById("message-input");
 let messageSend = document.getElementById("message-send");
 let clearBtn = document.getElementById("clear");
-let joinedBool = false;
-let oldusername;
-let uniqueIP;
+let username;
 let usersList = [];
 let shiftClick = false;
 let enterClick = false;
@@ -15,6 +13,7 @@ let shiftEnter = false;
 let pings = 0;
 
 const socket = io();
+
 window.onload = () => {
   document.title="CHAT";
 }
@@ -23,6 +22,15 @@ document.onmousemove = () => {
 }
 document.onkeydown = () => {
   document.title="CHAT";
+}
+
+function launchDM(person) {
+  let conf = window.confirm(`Are you sure you want to DM ${person}?`);
+  if (!conf) {
+    return;
+  } else {
+    window.location.href = `https://ChatWebsite.computer78601.repl.co/dm/${person}`
+  }
 }
 
 function removeA(arr) {
@@ -37,7 +45,7 @@ function removeA(arr) {
 }
 
 messageInput.addEventListener("keyup", function(event) {
-  if (event.shiftKey) {
+  if (event.keyCode===16) {
     shiftClick=false;
   }
   if (event.keyCode === 13) {
@@ -64,48 +72,33 @@ messageInput.addEventListener("keydown", event => {
   }
 })
 
-socket.on("start", (username, ip, _bool, users) => {
-  if (_bool) {
-    window.location.href = "https://ChatWebsite.computer78601.repl.co/stupid"
-  }
-  uniqueIP = ip;
-  usersList = users;
-  usersList.forEach((username) => {
-    document.getElementById("list").innerHTML  += `<p id="person">${username}</p><br><br>`;
-  })
-  function alwaysActive(original) {
-    if (usernameInput.value != undefined && usernameInput.value != null && usernameInput.value != "") {
-      joinChat.style.fontSize = '5vh'
-      joinChat.innerHTML = `Join as ${usernameInput.value}`;
-      setTimeout(alwaysActive, 1, original);
-    } else {
-      joinChat.style.fontSize = '6.3vh'
-      joinChat.innerHTML = `Join`;
-      setTimeout(alwaysActive, 1, original);
-    }
-  }
-  joinChat.innerHTML = `Join as ${username}`;
-  oldusername = username;
-  setTimeout(alwaysActive, 1, username);
-  setTimeout(usernameTask, 0, username);
+socket.on("READY", (name) => {
+  username = name
+  // usersList = users;
+  // usersList.forEach((username) => {
+  //   username = username.replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+  //   document.getElementById("list").innerHTML  += `<p id="person">${username}</p><br><br>`;
+  // })
+  // function alwaysActive(original) {
+  //   if (usernameInput.value != "") {
+  //     let val = usernameInput.value.replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+  //     loginSubmit.style.fontSize = '5vh'
+  //     loginSubmit.innerHTML = `Join as ${val}`;
+  //     setTimeout(alwaysActive, 0, original);
+  //   } else {
+  //     loginSubmit.style.fontSize = '6.3vh'
+  //     loginSubmit.innerHTML = `Enter a username`;
+  //     setTimeout(alwaysActive, 0, original);
+  //   }
+  // }
+  // setTimeout(alwaysActive, 0, name);
 });
 
 clearBtn.addEventListener("click", (e) => {
   chatMessages.innerHTML = "";
 })
 
-const usernameTask = (original) => {
-  if (usernameInput.value != oldusername) {
-    joinedBool=false;
-  }
-  setTimeout(usernameTask, 0, original)
-}
-
-joinChat.addEventListener("click", (e) => {
-  if (joinedBool === true) {
-    window.alert("You already joined!");
-    return;
-  }
+loginSubmit.addEventListener("click", (e) => {
   if (usernameInput.value.length <1) {
     window.alert("Please choose a username longer than a single character!");
     return;
@@ -114,23 +107,23 @@ joinChat.addEventListener("click", (e) => {
     window.alert("Please choose a username less or equal to 25 characters!");
     return;
   }
-  if (usersList.includes(usernameInput.value)) {
-    window.alert("Username already in use.");
-    return;
-  }
-  socket.emit("join", usernameInput.value);
-  oldusername=usernameInput.value;
-  joinedBool=true;
+  console.log(usernameInput.value);
+  username = usernameInput.value;
+  console.log(username);
+  socket.emit("join", username);
   document.getElementById("overlay1").style.display = "none";
   document.getElementById("footer").style.display = "block";
   document.getElementById("Title").style.display = "none";
-  joinChat.style.display = "none";
-  usernameInput.style.display = "none";
+  document.getElementById("login").style.display = "none";
+  // loginSubmit.style.display = "none";
+  // usernameInput.style.display = "none";
   chatBox.style.display="block";
 });
 
-socket.on("update", update => {
+socket.on("MESSAGE_CREATE", update => {
     let date = new Date(Date.now())
+    update.sender = update.sender.replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+    update.message = update.message.replaceAll("<", "&lt;").replaceAll(">", "&gt;")
     update.message = update.message.split("\n").join("<br>")
     while (true) {
       if (update.message.endsWith("<br>")) {
@@ -146,46 +139,45 @@ socket.on("update", update => {
         break;
       }
     }
-    if (update.ip === uniqueIP) {
-      chatMessages.innerHTML += `<p style="color:black; border: 100px;"><b>&#x3C;You&#x3E; ${update.sender}</b>: ${update.message}</p><p style="font-size: 2vh;">${date.toLocaleTimeString()} ${date.toDateString()}</p>`
-    } else if (update.message.includes("@"+oldusername)) {
-      chatMessages.innerHTML += `<p style="background-color: #FFFF99;"><b>${update.sender}</b>: ${update.message}</p><p style="font-size: 2vh;">${date.toLocaleTimeString()} ${date.toDateString()}</p>`;
+    if (update.sender === username) {
+      chatMessages.innerHTML += `<p>&lt;You&gt;<b>${update.sender}</b>: ${update.message}</p><p style="font-size: 2vh;">${date.toLocaleTimeString()} ${date.toDateString()}</p>`;
+    } else if (update.message.includes("@"+username)) {
+      chatMessages.innerHTML += `<p style="background-color: #FFFF99; opacity: 0.7;;" onclick=launchDM("${update.sender}")><b>${update.sender}</b>: ${update.message}</p><p style="font-size: 2vh;">${date.toLocaleTimeString()} ${date.toDateString()}</p>`;
       pings++;
       document.title = "PINGS "+ pings;
     } else {
-      chatMessages.innerHTML += `<p><b>${update.sender}</b>: ${update.message}</p><p style="font-size: 2vh;">${date.toLocaleTimeString()} ${date.toDateString()}</p>`;
+      chatMessages.innerHTML += `<p onclick=launchDM("${update.sender}")><b>${update.sender}</b>: ${update.message}</p><p style="font-size: 2vh;">${date.toLocaleTimeString()} ${date.toDateString()}</p>`;
     }
     chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
-socket.on("userjoin", username => {
+socket.on("GLOBAL_USER_ADD", username => {
   document.getElementById("list").innerHTML  += `<p id="person">${username}</p><br><br>`;
-  usersList.push(username);
-  chatMessages.innerHTML += ` <p><b><span style="color: #f26419">>${username}</span></b> has joined the chat!</p>`;
+  username = username.replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+  chatMessages.innerHTML += ` <p><b><span style="color: #f26419; margin-top: 0.7vh;">>${username}</span></b> has joined the chat!</p>`;
 });
 
-socket.on("userleave", username => {
+socket.on("GLOBAL_USER_EXIT", username => {
+  if (username === "" || username == null) {
+    return;
+  }
+  username = username.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
   document.getElementById("list").innerHTML = document.getElementById("list").innerHTML.replace(`<p id="person">${username}</p><br><br>`, '')
-  chatMessages.innerHTML += `<p><span style="font-family: 'Anton', sans-serif;" >${username}</span> <span style="color: #ff1900; font-family: 'Anton', sans-serif;" > has left the chat.</span></p>`;
-  removeA(usersList, username)
+  chatMessages.innerHTML += `<p><span style=" font-family: 'Anton', sans-serif; margin-top: 0.7vh;" >${username}</span> <span style="color: #ff1900; font-family: 'Anton', sans-serif;" > has left the chat.</span></p>`;
 });
-const currentDate = new Date();
-const timestamp = currentDate.getTime();
 
 messageSend.addEventListener("click", (e) => {
-  if (joinedBool === false) {
-    if (joinedBool === false) {
-      window.alert("The server just had an update!");
-      window.location.href="https://ChatWebsite.computer78601.repl.co";
-      return;
-    }
-  }
   if (messageInput.value.replaceAll("\n", "") == "") {
-    window.alert("Please enter some content!");
+    // window.alert("Please enter some content!");
+    // messageInput.value = '';
+    return;
+  }
+  if (messageInput.value.split("\n").length > 6) {
+    window.alert("Max lines are 5!");
     messageInput.value = '';
     return;
   }
   let message = messageInput.value;
   messageInput.value = '';
-  socket.emit("send", message, usernameInput.value, uniqueIP);
+  socket.emit("send", message, username);
 });

@@ -3,7 +3,7 @@ const socketio = require("socket.io");
 
 const app = express();
 app.use(express.static("template"));
-app.use('/dm', express.static("private"));
+app.use('/dm/:user', express.static("private"));
 app.use('/stupid', express.static("stupid"));
 app.use('/admin', express.static("admin"));
 
@@ -23,38 +23,35 @@ const server = app.listen(process.env.PORT || "8080", () => {
 });
 
 const io = socketio(server);
-let connected = [];
+let connected = {};
 let users = [];
 
 io.on("connection", socket => {
-  let username = "Guest";
-  let _ip = socket.handshake.headers["x-forwarded-for"];
-  let same_ip = false;
-  if (_ip != null) {
-    if (connected.includes(_ip)) {
-      same_ip = true;
-    } else {
-      connected.push(_ip);
-    }
-  }
-  socket.emit("start", username, _ip, same_ip, users);
+  let username = socket.handshake.headers["x-chatapp-username"];
+  let url = socket.handshake.headers.referer;
+  socket.emit("READY", username);
+  // socket.on("join", () => {
+  //   io.emit("GLOBAL_USER_ADD", username);
+  // });
+  // ^^^ above would work once sign up / login is done.
   socket.on("join", (name) => {
-    io.emit("userjoin", name || "Guest");
-    username=name;
-    users.push(username)
+    username = name;
+    io.emit("GLOBAL_USER_ADD", name);
   });
-  socket.on("send", (message, user, ip) => {
-    io.emit("update", {
-      sender: user || "Guest",
-      message: message.replace(/<[^>]*>?/gm, ''),
-      ip: ip
+  socket.on("send", (message, name) => {
+    io.emit("MESSAGE_CREATE", {
+      sender: name,
+      message: message,
     });
   });
+  // vvv below would work once sign up / login is done.
+  // socket.on("send", (message) => {
+  //   io.emit("MESSAGE_CREATE", {
+  //     sender: username,
+  //     message: message, // Maybe replace characters?
+  //   });
+  // });
   socket.on("disconnect", () => {
-    io.emit("userleave", username || "Guest");
-    if (!same_ip) {
-      removeA(connected, _ip);
-    }
-    removeA(users, username);
+    io.emit("GLOBAL_USER_EXIT", username);
   });
 });
