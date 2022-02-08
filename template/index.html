@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta property="og:type" content="undefined">
-    <meta property="og:title" content="ChatApp Made by [ CENSORED ]" />
-    <meta property="og:description" content="This ChatApp is well-designed. Jeff Bezos: This app is better than Amazon. Bill Gates: I wonder why I even spent time making Windows. Page: Alphabet.inc is nothing compare to this. Steve Jobs, who is in heaven: I should have dedicated to this!" />
+    <meta property="og:title" content="ChatApp Made by [ ThatOneDev#1534 and undefined#0000 ]" />
+    <meta property="og:description" content="This ChatApp is well-designed. Jeff Bezos: This app is better than Amazon. Bill Gates: I wonder why I even spent time making Windows. Page: Alphabet.inc is nothing compare to this." />
     <meta property="og:url" content="https://ChatWebsite.computer78601.repl.co/stupid" />
     <meta property="og:image" content="" />
     <title>CHAT</title>
@@ -16,15 +16,17 @@
     <script src="/ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
+    <script></script>
+    
   </head>
   <body>
     <p id="overlay1"></p>
-    <h1 id="Title">ChatApp</h1>
+    <h1 id="Title">Chat Application Made By <br> ThatOneDev#9999 && undefined</h1>
       <div id="login">
-        <input minlength="3" maxlength="18" type="text" width="50%" id="username-input"/>
+        <!-- <input minlength="3" maxlength="18" type="text" width="50%" id="username-input"/>
         <br>
-        <input minlength="3" maxlength="18" type="text" width="50%" id="password-input"/>
-        <button id="login-submit">Login</button>
+        <input minlength="3" maxlength="18" type="text" width="50%" id="password-input"/> -->
+        <button id="login-submit"></button>
       </div>
       <p id="footer"></p>
     <div  id="chat-box" class="hidden-box">
@@ -41,29 +43,40 @@
         </button> 
         <div id="emojipanel">
           <h1 id="emojititle">Emoji</h1>
-          <button onclick="insertemoji('😃', 'message-input')" id="emoji1">😃</button>
+          <table>
+            <td><button onclick="insertemoji('😃', 'message-input')" id="emoji1">😃</button>
           <button onclick="insertemoji('😠', 'message-input')" id="emoji1">😠</button>
           <button onclick="insertemoji('👋', 'message-input')" id="emoji1">👋</button>
           <button onclick="insertemoji('😳', 'message-input')" id="emoji1">😳</button>
           <button onclick="insertemoji('😂', 'message-input')" id="emoji1">😂</button>
           <button onclick="insertemoji('🙃', 'message-input')" id="emoji1">🙃</button>
           <button onclick="insertemoji('😝', 'message-input')" id="emoji1">😝</button>
+</td>
 
+<td>
           <button onclick="insertemoji('🙁', 'message-input')" id="emoji2">🙁</button>
           <button onclick="insertemoji('😭', 'message-input')" id="emoji2">😭</button>
           <button onclick="insertemoji('👍', 'message-input')" id="emoji2">👍</button>
           <button onclick="insertemoji('👎', 'message-input')" id="emoji2">👎</button>
           <button onclick="insertemoji('😬', 'message-input')" id="emoji2">😬</button>
           <button onclick="insertemoji('😶', 'message-input')" id="emoji2">😶</button>
-          <button onclick="insertemoji('😆', 'message-input')" id="emoji2">😆</button>
-          <button onclick="insertemoji('😌', 'message-input')" id="emoji3">😌</button>
+          <button onclick="insertemoji('😆', 'message-input')" id="emoji2">😆</button></td>
+
+          <td> <button onclick="insertemoji('😌', 'message-input')" id="emoji3">😌</button>
           <button onclick="insertemoji('😉', 'message-input')" id="emoji3">😉</button>
           <button onclick="insertemoji('🤑', 'message-input')" id="emoji3">🤑</button>
           <button onclick="insertemoji('😋', 'message-input')" id="emoji3">😋</button>
           <button onclick="insertemoji('🙄', 'message-input')" id="emoji3">🙄</button>
           <button onclick="insertemoji('😥', 'message-input')" id="emoji3">😥</button>
-          <button onclick="insertemoji('😴', 'message-input')" id="emoji3">😴</button>
+          <button onclick="insertemoji('😴', 'message-input')" id="emoji3">😴</button></td>
+
+
+
+          </table>
+          
+         
         </div>
+        <button id="logoutBtn"><img id="leaveimg"   src="leave.png" alt="Logout"></button>
         <textarea
           style="resize: none"
           placeholder="Type Messages Here"
@@ -75,27 +88,30 @@
         <button id="clear">Clear Chat</button>
       </div>
     </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./index.js"></script>
     <script src="./fitty.min.js" ></script>
     <script>
       $(function () {
         $("body").resizable();
         $("#overlay1").resizable();
-       $("#Title").resizable();
-       $("#footer").resizable();
-       $("#chat-messages").resizable();
-         $("#emojipanel").resizable();
-           $("#emoji1").resizable();
-             $("#emoji2").resizable();
-             $("#emoji3").resizable();
-    
+        $("#Title").resizable();
+        $("#footer").resizable();
+        $("#chat-messages").resizable();
+        $("#emojipanel").resizable();
+        $("#emoji1").resizable();
+        $("#emoji2").resizable();
+        $("#emoji3").resizable();
       });
     </script>
     </script>
-    
-    <script></script>
-   
-     <script>
+ 
+     <script>$("#message-input").change(function(msg) {
+    if (document.getElementById('message-input').value.includes('hello')) {
+      console.log('worked')
+    }
+});
+
       function test() {
         if (document.getElementById("emojipanel").style.display === "none") {
           document.getElementById("emojipanel").style.display = "block";
@@ -107,6 +123,19 @@
       function insertemoji(emoji, element) {
         document.getElementById(element).value += emoji;
       }
+    
     </script>
+
+    <script>
+     function shortenemoji() {
+      if (toString( document.getElementById('message-input').value).includes(":XD:")) {
+        let words = toString(document.getElementById('message-input').value).split(" ")
+        console.log(words)
+      } 
+     }
+setInterval(shortenemoji(), 0)
+    
+    </script>
+
   </body>
 </html>
